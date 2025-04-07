@@ -10,6 +10,11 @@ const validateResource2 = [
     body('description').notEmpty().withMessage('Description is required'),
 ];
 
+const validateAuth = [
+    body('username').notEmpty().withMessage('Username is required'),
+    body('password').notEmpty().withMessage('Password is required'),
+]
+
 const validate = (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -29,5 +34,6 @@ const validationMiddleware = (validations) => {
 module.exports = {
     validateResource1,
     validateResource2,
+    validateAuth,
     validationMiddleware,
 };

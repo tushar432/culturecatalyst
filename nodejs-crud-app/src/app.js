@@ -1,6 +1,7 @@
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
+const authroutes = require('./routes/authRoutes');
 const resource1Routes = require('./routes/resource1Routes');
 const resource2Routes = require('./routes/resource2Routes');
 const authMiddleware = require('./middlewares/authMiddleware');
@@ -12,7 +13,10 @@ const server = http.createServer(app);
 const io = socketIo(server);
 
 app.use(express.json());
-// app.use(authMiddleware);
+
+app.use('/api/auth', authroutes);
+
+app.use(authMiddleware);
 
 app.use('/api/resource1', resource1Routes); 
 app.use('/api/resource2', resource2Routes);
